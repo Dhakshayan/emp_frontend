@@ -12,7 +12,6 @@ const EmployeeList = () => {
         };
         fetchData();
     }, []);
-
     const filteredEmployees = employees.filter((emp) =>
         emp.name.toLowerCase().includes(search.toLowerCase()) ||
         emp.department.toLowerCase().includes(search.toLowerCase()) ||

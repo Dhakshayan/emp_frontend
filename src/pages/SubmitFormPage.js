@@ -17,34 +17,26 @@ const AddEmployee = () => {
         const { name, value } = e.target;
         setForm({
             ...form,
-            [name]: name === "age" ? Number(value) : value, // Convert age to number
+            [name]: name === "age" ? Number(value) : value,
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage("");
-
-        // Basic validation
         if (!form.name || !form.email || !form.phone || !form.department || !form.date_of_joining || !form.role || !form.age) {
             setMessage("All fields are required.");
             return;
         }
-
-        // Phone number validation
         const phoneRegex = /^\d{10}$/;
         if (!phoneRegex.test(form.phone)) {
             setMessage("Phone number must be a 10-digit number.");
             return;
         }
-
-        // Age validation
         if (form.age < 18) {
             setMessage("Age must be 18 or above.");
             return;
         }
-
-        // Date validation
         const today = new Date().toISOString().split("T")[0];
         if (form.date_of_joining > today) {
             setMessage("Date of joining cannot be in the future.");
@@ -78,8 +70,6 @@ const AddEmployee = () => {
             setMessage(err.message || "Submission Failed!");
         }
     };
-
-    // Get today's date in YYYY-MM-DD format
     const maxDate = new Date().toISOString().split("T")[0];
 
     return (
@@ -95,7 +85,7 @@ const AddEmployee = () => {
                     value={form.date_of_joining}
                     onChange={handleChange}
                     type="date"
-                    max={maxDate} // Restrict dates to today or earlier
+                    max={maxDate}
                 />
                 <input name="role" value={form.role} onChange={handleChange} placeholder="Role" />
                 <input name="age" value={form.age} onChange={handleChange} placeholder="Age" type="number" />

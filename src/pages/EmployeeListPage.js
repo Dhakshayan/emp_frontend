@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
 
 const EmployeeList = () => {
-    const [employees, setEmployees] = useState([]); // State for employee data
-    const [search, setSearch] = useState(""); // State for search input
+    const [employees, setEmployees] = useState([]); 
+    const [search, setSearch] = useState("");
 
-    // Fetch employee data from API on component mount
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await fetch("http://localhost:5000/");
                 if (!res.ok) throw new Error("Failed to fetch employees");
                 const data = await res.json();
-                setEmployees(data || []); // Ensure data is an array
+                setEmployees(data || []);
             } catch (error) {
                 console.error("Error fetching data:", error);
-                setEmployees([]); // Fallback to empty array on error
+                setEmployees([]);
             }
         };
         fetchData();
     }, []);
 
-    // Filter employees based on search query
+
     const filteredEmployees = employees.filter((emp) => {
-        const name = emp.name || ""; // Fallback to empty string if undefined
+        const name = emp.name || "";
         const department = emp.department || "";
         const employeeId = emp.employee_id || "";
         return (
@@ -35,7 +34,6 @@ const EmployeeList = () => {
     return (
         <div style={{ padding: "20px" }}>
             <h1>Employee List</h1>
-            {/* Search Input */}
             <input
                 type="text"
                 placeholder="Search by name, department, or ID"
@@ -48,7 +46,6 @@ const EmployeeList = () => {
                     width: "300px",
                 }}
             />
-            {/* Employee Table */}
             <table
                 style={{
                     width: "100%",
@@ -92,8 +89,6 @@ const EmployeeList = () => {
         </div>
     );
 };
-
-// Styles for the table
 const tableHeaderStyle = {
     backgroundColor: "#f4f4f4",
     padding: "10px",
