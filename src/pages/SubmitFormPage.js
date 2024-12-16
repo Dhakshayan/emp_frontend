@@ -31,6 +31,26 @@ const AddEmployee = () => {
             return;
         }
 
+        // Phone number validation
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(form.phone)) {
+            setMessage("Phone number must be a 10-digit number.");
+            return;
+        }
+
+        // Age validation
+        if (form.age < 18) {
+            setMessage("Age must be 18 or above.");
+            return;
+        }
+
+        // Date validation
+        const today = new Date().toISOString().split("T")[0];
+        if (form.date_of_joining > today) {
+            setMessage("Date of joining cannot be in the future.");
+            return;
+        }
+
         try {
             const res = await fetch("http://localhost:5000/employees", {
                 method: "POST",
@@ -59,6 +79,9 @@ const AddEmployee = () => {
         }
     };
 
+    // Get today's date in YYYY-MM-DD format
+    const maxDate = new Date().toISOString().split("T")[0];
+
     return (
         <div>
             <h1>Add Employee</h1>
@@ -67,7 +90,13 @@ const AddEmployee = () => {
                 <input name="email" value={form.email} onChange={handleChange} placeholder="Email" />
                 <input name="phone" value={form.phone} onChange={handleChange} placeholder="Phone" />
                 <input name="department" value={form.department} onChange={handleChange} placeholder="Department" />
-                <input name="date_of_joining" value={form.date_of_joining} onChange={handleChange} type="date" />
+                <input
+                    name="date_of_joining"
+                    value={form.date_of_joining}
+                    onChange={handleChange}
+                    type="date"
+                    max={maxDate} // Restrict dates to today or earlier
+                />
                 <input name="role" value={form.role} onChange={handleChange} placeholder="Role" />
                 <input name="age" value={form.age} onChange={handleChange} placeholder="Age" type="number" />
                 <button type="submit">Submit</button>
