@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const EmployeeList = () => {
-    const [employees, setEmployees] = useState([]); 
+    const [employees, setEmployees] = useState([]);
     const [search, setSearch] = useState("");
 
     useEffect(() => {
@@ -19,7 +20,6 @@ const EmployeeList = () => {
         fetchData();
     }, []);
 
-
     const filteredEmployees = employees.filter((emp) => {
         const name = emp.name || "";
         const department = emp.department || "";
@@ -32,8 +32,8 @@ const EmployeeList = () => {
     });
 
     return (
-        <div style={{ padding: "20px" }}>
-            <h1>Employee List</h1>
+        <div style={{ width: "90%", maxWidth: "800px", margin: "auto", textAlign: "center" }}>
+            <h1 style={{ marginBottom: "20px" }}>Employee List</h1>
             <input
                 type="text"
                 placeholder="Search by name, department, or ID"
@@ -43,7 +43,9 @@ const EmployeeList = () => {
                     marginBottom: "20px",
                     padding: "10px",
                     fontSize: "16px",
-                    width: "300px",
+                    width: "100%",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
                 }}
             />
             <table
@@ -51,6 +53,7 @@ const EmployeeList = () => {
                     width: "100%",
                     borderCollapse: "collapse",
                     marginTop: "20px",
+                    border: "1px solid #ddd",
                 }}
             >
                 <thead>
@@ -86,21 +89,40 @@ const EmployeeList = () => {
                     )}
                 </tbody>
             </table>
+
+            <Link to="/">
+                <button
+                    style={{
+                        marginTop: "20px",
+                        padding: "10px 20px",
+                        backgroundColor: "#4CAF50",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                    }}
+                >
+                    Add New Employee
+                </button>
+            </Link>
         </div>
     );
 };
+
 const tableHeaderStyle = {
     backgroundColor: "#f4f4f4",
     padding: "10px",
     textAlign: "left",
     borderBottom: "2px solid #ddd",
     fontWeight: "bold",
+    fontSize: "14px",
 };
 
 const tableCellStyle = {
     padding: "10px",
     textAlign: "left",
     borderBottom: "1px solid #ddd",
+    fontSize: "14px",
 };
 
 const noDataStyle = {
@@ -108,6 +130,7 @@ const noDataStyle = {
     textAlign: "center",
     fontStyle: "italic",
     color: "#999",
+    fontSize: "16px",
 };
 
 export default EmployeeList;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
     const [form, setForm] = useState({
@@ -70,39 +71,91 @@ const AddEmployee = () => {
             setMessage(err.message || "Submission Failed!");
         }
     };
+
     const maxDate = new Date().toISOString().split("T")[0];
 
     return (
-        <div>
+        <div style={{ width: "300px", margin: "auto", textAlign: "center" }}>
             <h1>Add Employee</h1>
-            <form onSubmit={handleSubmit}>
-                <input name="name" value={form.name} onChange={handleChange} placeholder="Name" />
-                <input name="email" value={form.email} onChange={handleChange} placeholder="Email" />
-                <input name="phone" value={form.phone} onChange={handleChange} placeholder="Phone" />
-                <input name="department" value={form.department} onChange={handleChange} placeholder="Department" />
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <input
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="Name"
+                    style={{ padding: "8px" }}
+                />
+                <input
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    style={{ padding: "8px" }}
+                />
+                <input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="Phone"
+                    style={{ padding: "8px" }}
+                />
+                <input
+                    name="department"
+                    value={form.department}
+                    onChange={handleChange}
+                    placeholder="Department"
+                    style={{ padding: "8px" }}
+                />
                 <input
                     name="date_of_joining"
                     value={form.date_of_joining}
                     onChange={handleChange}
                     type="date"
                     max={maxDate}
+                    style={{ padding: "8px" }}
                 />
-                <input name="role" value={form.role} onChange={handleChange} placeholder="Role" />
-                <input name="age" value={form.age} onChange={handleChange} placeholder="Age" type="number" />
-                <button type="submit">Submit</button>
-                <button type="reset" onClick={() => setForm({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    department: "",
-                    date_of_joining: "",
-                    role: "",
-                    age: ""
-                })}>
+                <input
+                    name="role"
+                    value={form.role}
+                    onChange={handleChange}
+                    placeholder="Role"
+                    style={{ padding: "8px" }}
+                />
+                <input
+                    name="age"
+                    value={form.age}
+                    onChange={handleChange}
+                    placeholder="Age"
+                    type="number"
+                    style={{ padding: "8px" }}
+                />
+                <button type="submit" style={{ padding: "10px", backgroundColor: "#4CAF50", color: "white", border: "none", cursor: "pointer" }}>
+                    Submit
+                </button>
+                <button
+                    type="reset"
+                    onClick={() =>
+                        setForm({
+                            name: "",
+                            email: "",
+                            phone: "",
+                            department: "",
+                            date_of_joining: "",
+                            role: "",
+                            age: ""
+                        })
+                    }
+                    style={{ padding: "10px", backgroundColor: "#f44336", color: "white", border: "none", cursor: "pointer" }}
+                >
                     Reset
                 </button>
             </form>
-            {message && <p>{message}</p>}
+            {message && <p style={{ color:"red", marginTop:"10px" }}>{message}</p>}
+            <Link to="/employees">
+                <button style={{ marginTop:"10px", padding: "10px", backgroundColor:"#008CBA", color: "white", border: "none", cursor: "pointer" }}>
+                    View Employees
+                </button>
+            </Link>
         </div>
     );
 };
