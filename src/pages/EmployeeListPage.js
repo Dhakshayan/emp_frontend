@@ -8,7 +8,7 @@ const EmployeeList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch("http://localhost:5000/");
+                const res = await fetch("https://emp-backend-3jkq.onrender.com/");
                 if (!res.ok) throw new Error("Failed to fetch employees");
                 const data = await res.json();
                 setEmployees(data || []);

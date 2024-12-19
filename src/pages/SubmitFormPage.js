@@ -45,7 +45,7 @@ const AddEmployee = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:5000/employees", {
+            const res = await fetch("https://emp-backend-3jkq.onrender.com/employees", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),

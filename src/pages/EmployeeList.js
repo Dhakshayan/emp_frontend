@@ -6,7 +6,7 @@ const EmployeeList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch("http://localhost:5000/api/employees");
+            const res = await fetch("https://emp-backend-3jkq.onrender.com/");
             const data = await res.json();
             setEmployees(data);
         };
@@ -30,6 +30,7 @@ const EmployeeList = () => {
             <table>
                 <thead>
                     <tr>
+
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
